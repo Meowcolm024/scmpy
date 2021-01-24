@@ -9,7 +9,7 @@ data LispVal
   | Number Integer
   | String String
   | Boolean Bool
-  deriving Show
+  deriving (Show, Eq)
 
 regularParse :: Parser a -> String -> Either ParseError a
 regularParse p = parse p "(unknown)"

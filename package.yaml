@@ -21,7 +21,8 @@ description:         Please see the README on GitHub at <https://github.com/Meow
 
 dependencies:
 - base >= 4.7 && < 5
-- parsec
+- parsec >= 3.1
+- interpolatedstring-perl6 >= 0.9
 
 library:
   source-dirs: src
@@ -47,3 +48,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - scmpy
+    - hspec >= 2.7

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e890a750dec0ae79fff6d9467ee8220e7646423630da6a38657c2b52aa67ba38
+-- hash: ab768899c8fbc9f233ff65ea3cc857be66ff6dd17dc827d163e4c38c20ffd0a5
 
 name:           scmpy
 version:        0.1.0.0
@@ -29,13 +29,15 @@ library
   exposed-modules:
       Lib
       Parser
+      Python
   other-modules:
       Paths_scmpy
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
-    , parsec
+    , interpolatedstring-perl6 >=0.9
+    , parsec >=3.1
   default-language: Haskell2010
 
 executable scmpy-exe
@@ -47,7 +49,8 @@ executable scmpy-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , parsec
+    , interpolatedstring-perl6 >=0.9
+    , parsec >=3.1
     , scmpy
   default-language: Haskell2010
 
@@ -61,6 +64,8 @@ test-suite scmpy-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , parsec
+    , hspec >=2.7.6
+    , interpolatedstring-perl6 >=0.9
+    , parsec >=3.1
     , scmpy
   default-language: Haskell2010
