@@ -1,6 +1,11 @@
-module Parser (LispVal (..), parseLisp) where
+module Parser
+  ( LispVal(..)
+  , parseLisp
+  )
+where
 
-import Text.ParserCombinators.Parsec hiding (spaces)
+import           Text.ParserCombinators.Parsec
+                                         hiding ( spaces )
 
 data LispVal
   = Atom String
@@ -9,7 +14,16 @@ data LispVal
   | Number Integer
   | String String
   | Boolean Bool
-  deriving (Show, Eq)
+  deriving (Eq)
+
+instance Show LispVal where
+  show (Atom x) = x
+  show (List x) = "(" ++ (unwords . map show) x ++ ")"
+  show (DottedList x y) =
+    "(" ++ (unwords . map show) x ++ " . " ++ show y ++ ")"
+  show (Number  x) = show x
+  show (String  x) = "\"" ++ x ++ "\""
+  show (Boolean x) = if x then "#t" else "#f"
 
 parseLisp :: String -> Either ParseError LispVal
 parseLisp = regularParse parseExpr
@@ -24,24 +38,23 @@ spaces :: Parser ()
 spaces = skipMany1 space
 
 parseExpr :: Parser LispVal
-parseExpr =
-  choice
-    [ parseAtom,
-      parseStr,
-      parseNumber,
-      parseQuoted,
-      char '(' *> choice [try parseList, parseDotted] <* char ')'
-    ]
+parseExpr = choice
+  [ parseAtom
+  , parseStr
+  , parseNumber
+  , parseQuoted
+  , char '(' *> choice [try parseList, parseDotted] <* char ')'
+  ]
 
 parseAtom :: Parser LispVal
 parseAtom = do
   first <- choice [letter, symbol]
-  rest <- many $ choice [letter, digit, symbol]
+  rest  <- many $ choice [letter, digit, symbol]
   let atom = first : rest
   return $ case atom of
     "#t" -> Boolean True
     "#f" -> Boolean False
-    _ -> Atom atom
+    _    -> Atom atom
 
 parseStr :: Parser LispVal
 parseStr = String <$> (char '\"' *> (many . noneOf) "\"" <* char '\"')

@@ -3,7 +3,9 @@
 
 module Python where
 
-import Text.InterpolatedString.Perl6 (q, qq)
+import           Text.InterpolatedString.Perl6  ( q
+                                                , qq
+                                                )
 
 {-
 Library for translating to Python
@@ -12,8 +14,7 @@ might be changed to using `qq` instead of `q` later
 
 -- Standard library for scmpy
 scmpy :: String
-scmpy =
-  [q|#### -- scmpy lib starts -- ####
+scmpy = [q|#### -- scmpy lib starts -- ####
 def _list(*kwargs): 
     return list(kwargs)
 

@@ -5,8 +5,6 @@ import Parser
 main :: IO ()
 main = hspec spec
 
-parseLisp = regularParse parseExpr
-
 -- scheme -> python
 transpile :: String -> String
 transpile = undefined
