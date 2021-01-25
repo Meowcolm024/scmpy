@@ -1,6 +1,6 @@
 module Main where
 
-import Lib ( entry )
+import Lib (entry)
 
 main :: IO ()
 main = entry
