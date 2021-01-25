@@ -1,4 +1,5 @@
-def _list(*kwargs):
+#### -- scmpy lib starts -- ####
+def _list(*kwargs): 
     return list(kwargs)
 
 def cons(x, xs):
@@ -7,7 +8,7 @@ def cons(x, xs):
     if type(xs) == tuple:
         return (x, xs)
 
-def car(xs):
+def car(xs): 
     return xs[0]
 
 def cdr(xs):
@@ -16,8 +17,6 @@ def cdr(xs):
     if type(xs) == tuple:
         return xs[2]
 
-def _if(pred, result, alt):
-    if pred:
-        return result
-    else:
-        return alt
+def _if(pred, result, alt): 
+    return result if pred else alt
+#### --  scmpy lib end  -- ####

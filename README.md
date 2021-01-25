@@ -1,3 +1,3 @@
 # scmpy
 
-Transmpile *Scheme* to *Python*!
+Transpiler *Scheme* to *Python*!

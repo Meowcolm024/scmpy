@@ -23,6 +23,7 @@ dependencies:
 - base >= 4.7 && < 5
 - parsec >= 3.1
 - interpolatedstring-perl6 >= 0.9
+- optparse-applicative >= 0.14
 
 library:
   source-dirs: src

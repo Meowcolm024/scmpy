@@ -1,4 +1,4 @@
-module Parser where
+module Parser (LispVal (..), parseLisp) where
 
 import Text.ParserCombinators.Parsec hiding (spaces)
 
@@ -10,6 +10,9 @@ data LispVal
   | String String
   | Boolean Bool
   deriving (Show, Eq)
+
+parseLisp :: String -> Either ParseError LispVal
+parseLisp = regularParse parseExpr
 
 regularParse :: Parser a -> String -> Either ParseError a
 regularParse p = parse p "(unknown)"

@@ -7,6 +7,10 @@ main = hspec spec
 
 parseLisp = regularParse parseExpr
 
+-- scheme -> python
+transpile :: String -> String
+transpile = undefined
+
 spec = do
   describe "convertBase" $ do
     it "should work on simple examples" $ do
