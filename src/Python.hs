@@ -3,6 +3,9 @@
 
 module Python where
 
+import qualified Lisp                          as L
+                                                ( )
+
 import           Text.InterpolatedString.Perl6  ( q
                                                 , qq
                                                 )

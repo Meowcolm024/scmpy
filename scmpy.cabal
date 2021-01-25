@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 273cb11ac94418f0ffea0977199582ddfccaade24d51125ad7a5b40cc79d8f99
+-- hash: c5e10ad0d5275b2eaf778a6912848646997edae1dcd79baceeef4b4823227ad3
 
 name:           scmpy
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Generator
       Lib
       Lisp
       Parser
