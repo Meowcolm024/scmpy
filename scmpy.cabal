@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c5e10ad0d5275b2eaf778a6912848646997edae1dcd79baceeef4b4823227ad3
+-- hash: 7467ed0c759f02617604b4d160820fd98b3b87ab012396db09397038ba6d8749
 
 name:           scmpy
 version:        0.1.0.0
@@ -38,6 +38,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , containers >=0.6
     , interpolatedstring-perl6 >=0.9
     , optparse-applicative >=0.14
     , parsec >=3.1
@@ -52,6 +53,7 @@ executable scmpy-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , containers >=0.6
     , interpolatedstring-perl6 >=0.9
     , optparse-applicative >=0.14
     , parsec >=3.1
@@ -68,6 +70,7 @@ test-suite scmpy-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , containers >=0.6
     , hspec >=2.7
     , interpolatedstring-perl6 >=0.9
     , optparse-applicative >=0.14

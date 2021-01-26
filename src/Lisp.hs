@@ -50,7 +50,7 @@ eval l@(P.List (P.Atom "lambda" : P.List _ : _)) = eval $ procLambda l
 eval (P.List [P.Atom "if", pre, res, alt]) =
   IfExpr (eval pre) (eval res) (eval alt)
 eval l@(P.List (P.Atom "let"  : _)      ) = eval $ desugarLet l      -- `let x = a in y` is just (\x -> y) a
-eval c@(P.List (P.Atom "cond" : _)      ) = eval $ desugarCond c    -- `cond` is just chained `if`s
+eval c@(P.List (P.Atom "cond" : _)      ) = eval $ desugarCond c     -- `cond` is just chained `if`s
 eval (  P.List [P.Atom "quote", content]) = Quote (eval content)
 eval (  P.List xs                       ) = List (map eval xs)
 eval (  P.DottedList x y                ) = DottedList (map eval x) (eval y)

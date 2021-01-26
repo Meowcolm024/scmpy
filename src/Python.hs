@@ -5,10 +5,10 @@ module Python where
 
 import qualified Lisp                          as L
                                                 ( )
-
 import           Text.InterpolatedString.Perl6  ( q
                                                 , qq
                                                 )
+import           Data.List                      ( intersperse )
 
 {-
 Library for translating to Python
@@ -41,9 +41,20 @@ def _if(pred, result, alt):
 #### --  scmpy lib end  -- ####
 |]
 
--- * example of converting (temp)
-
--- * later will be something like :: LispVal -> String
+reformat :: [String] -> String
+reformat = concat . intersperse ","
 
 define :: String -> String -> String
 define var content = [qq|{var} = {content}|]
+
+funcApp :: String -> [String] -> String
+funcApp fn args = let arg' = reformat args in [qq|{fn}({arg'})|]
+
+list :: [String] -> String
+list l = let l' = reformat l in [qq|[{l'}]|]
+
+pair :: String -> String -> String
+pair x y = [qq|({x},{y})|]
+
+lambda :: [String] -> String -> String
+lambda args body = let arg' = reformat args in [qq|(lambda {arg'}: {body})|]

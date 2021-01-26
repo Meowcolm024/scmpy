@@ -2,8 +2,14 @@
 import operator
 import functools
 
-def _list(*kwargs): 
+def _list(*kwargs):
     return list(kwargs)
+
+def display(*kwargs):
+    for i in kwargs:
+        print(i, end=' ')
+
+displayln = print
 
 def cons(x, xs):
     if type(xs) == list:
@@ -11,7 +17,7 @@ def cons(x, xs):
     if type(xs) == tuple:
         return (x, xs)
 
-def car(xs): 
+def car(xs):
     return xs[0]
 
 def cdr(xs):
@@ -20,22 +26,27 @@ def cdr(xs):
     if type(xs) == tuple:
         return xs[2]
 
-def _if(pred, result, alt): 
+def _null(x):
+    return len(x) == 0
+
+null = ()
+
+def _if(pred, result, alt):
     return result if pred else alt
 
-def add(*kwargs):
+def _add(*kwargs):
     return functools.reduce(operator.add, list(kwargs))
 
-def sub(*kwargs):
+def _sub(*kwargs):
     return functools.reduce(operator.sub, list(kwargs))
 
-def mul(*kwargs):
+def _mul(*kwargs):
     return functools.reduce(operator.mul, list(kwargs))
 
-def div(*kwargs):
+def _div(*kwargs):
     return functools.reduce(operator.truediv, list(kwargs))
 
-def eq(*kwargs):
+def _eq(*kwargs):
     return functools.reduce(operator.eq, list(kwargs))
 
 def _and(*kwargs):
