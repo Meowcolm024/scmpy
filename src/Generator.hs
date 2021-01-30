@@ -16,22 +16,22 @@ transpile = gen . mapSt convertPrim
 
 prim :: M.Map String String
 prim = M.fromList
-    [ ("+"    , "_add")
-    , ("-"    , "_sub")
-    , ("*"    , "_mul")
-    , ("/"    , "_div")
-    , ("="    , "_eq")
-    , ("<"    , "_lt")
-    , ("<="   , "_le")
-    , (">"    , "_gt")
-    , (">="   , "_ge")
-    , ("list" , "_list")
-    , ("list?", "_listq")
-    , ("pair?", "_listq")
-    , ("null?", "_null")
-    , ("not"  , "_not")
-    , ("and"  , "_and")
-    , ("or"   , "_or")
+    [ ("+"    , "add_")
+    , ("-"    , "sub_")
+    , ("*"    , "mul_")
+    , ("/"    , "div_")
+    , ("="    , "eq_")
+    , ("<"    , "lt_")
+    , ("<="   , "le_")
+    , (">"    , "gt_")
+    , (">="   , "ge_")
+    , ("list" , "list_")
+    , ("list?", "listq_")
+    , ("pair?", "listq_")
+    , ("null?", "null_")
+    , ("not"  , "not_")
+    , ("and"  , "and_")
+    , ("or"   , "or_")
     ]
 
 convertPrim :: String -> String

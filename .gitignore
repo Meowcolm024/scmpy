@@ -3,3 +3,4 @@
 /.vscode
 a.py
 scmpylib.py
+/__pycache__
