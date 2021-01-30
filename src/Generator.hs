@@ -3,6 +3,7 @@ module Generator where
 import           Lisp
 import           Python
 import qualified Data.Map                      as M
+import           Data.Maybe                     ( fromMaybe )
 
 -- * currently not analyzing the env (not now)
 -- data Env = Local [String] Env | Global [String] deriving Show
@@ -20,17 +21,21 @@ prim = M.fromList
     , ("*"    , "_mul")
     , ("/"    , "_div")
     , ("="    , "_eq")
+    , ("<"    , "_lt")
+    , ("<="   , "_le")
+    , (">"    , "_gt")
+    , (">="   , "_ge")
     , ("list" , "_list")
     , ("list?", "_listq")
     , ("pair?", "_listq")
     , ("null?", "_null")
     , ("not"  , "_not")
+    , ("and"  , "_and")
+    , ("or"   , "_or")
     ]
 
 convertPrim :: String -> String
-convertPrim x = case M.lookup x prim of
-    Just y  -> y
-    Nothing -> x
+convertPrim x = fromMaybe x (M.lookup x prim)
 
 gen :: LispStruct -> String
 gen (Atom    x     ) = x
@@ -38,7 +43,7 @@ gen (Number  x     ) = show x
 gen (String  x     ) = "\"" ++ x ++ "\""
 gen (Boolean x     ) = if x then "True" else "False"
 gen (Define x y    ) = define (gen x) (gen y)
-gen (IfExpr p r a  ) = "_if(" ++ gen p ++ "," ++ gen r ++ "," ++ gen a ++ ")"
+gen (IfExpr p r a  ) = "(" ++ gen r ++ " if " ++ gen p ++ " else " ++ gen a ++ ")"
 gen (Quote q       ) = genQuote q
 gen (Lambda a b    ) = lambda (map gen a) (gen b)
 gen (List l        ) = genList l

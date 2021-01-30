@@ -2,6 +2,14 @@
 import operator
 import functools
 
+def chained(op, xs):
+    if len(xs) <= 1:
+        return False
+    x = op(xs[0], xs[1])
+    for i in range(1, len(xs) - 2):
+        x = x and op(xs[i], xs[i+1])
+    return x
+
 def display(*kwargs):
     for i in kwargs:
         print(i, end=' ')
@@ -23,5 +31,8 @@ _and = lambda *kwargs: functools.reduce(operator.and_, list(kwargs))
 _or = lambda *kwargs: functools.reduce(operator.or_, list(kwargs))
 _not = lambda x: not x
 _listq = lambda x: type(x) == list or type(x) == tuple
-
+_lt = lambda *kwargs: chained(operator.lt, list(kwargs))
+_le = lambda *kwargs: chained(operator.le, list(kwargs))
+_gt = lambda *kwargs: chained(operator.gt, list(kwargs))
+_ge = lambda *kwargs: chained(operator.ge, list(kwargs))
 #### --  scmpy lib end  -- ####

@@ -25,11 +25,21 @@ instance Show LispVal where
   show (String  x) = "\"" ++ x ++ "\""
   show (Boolean x) = if x then "#t" else "#f"
 
-parseLisp :: String -> Either ParseError LispVal
-parseLisp = regularParse parseExpr
+parseLisp :: String -> Either ParseError [LispVal]
+parseLisp = regularParse trim
 
 regularParse :: Parser a -> String -> Either ParseError a
 regularParse p = parse p "(unknown)"
+
+trim :: Parser [LispVal]
+trim = do
+  a <- optionMaybe parseExpr
+  choice [many space, many (char '\n')]
+  case a of
+    Just a' -> do
+      b <- trim
+      return $ a' : b
+    Nothing -> return []
 
 symbol :: Parser Char
 symbol = oneOf "!$%&|*+-/:<=>?@~_^#"
