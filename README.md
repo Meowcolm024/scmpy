@@ -1,6 +1,6 @@
 # scmpy
 
-A naive *Scheme* to *Python* transpiler!
+A naive *Scheme* to *Python* transpiler.
 
 ## Clone & Build
 
@@ -23,7 +23,7 @@ $ python a.py
 Use the `-h` to see more options:
 
 ``` sh
-stack exec -- scmpy-exe -h                                                                                        Meowcolm
+stack exec -- scmpy-exe -h
 scmpy - A Scheme to Python transpiler
 
 Usage: scmpy-exe (-f|--file SOURCE) [-o|--output OUTPUT] [--header] [--llist]
@@ -39,6 +39,7 @@ Available options:
 
 - Notice `-llist` is not available yet.
 
-## Not supported
+## Issues
 
-- muatble ops like `set!`
+- muatble ops like `set!` are not supported.
+- vars like `list`, `not`, `and`, `or`, `map`, `filter` are reserved.
