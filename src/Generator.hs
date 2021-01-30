@@ -16,34 +16,37 @@ transpile = gen . mapSt convertPrim
 
 prim :: M.Map String String
 prim = M.fromList
-    [ ("+"    , "add_")
-    , ("-"    , "sub_")
-    , ("*"    , "mul_")
-    , ("/"    , "div_")
-    , ("="    , "eq_")
-    , ("<"    , "lt_")
-    , ("<="   , "le_")
-    , (">"    , "gt_")
-    , (">="   , "ge_")
-    , ("list" , "list_")
-    , ("list?", "listq_")
-    , ("pair?", "listq_")
-    , ("null?", "null_")
-    , ("not"  , "not_")
-    , ("and"  , "and_")
-    , ("or"   , "or_")
-    ]
+  [ ("+"    , "add_")
+  , ("-"    , "sub_")
+  , ("*"    , "mul_")
+  , ("/"    , "div_")
+  , ("="    , "eq_")
+  , ("<"    , "lt_")
+  , ("<="   , "le_")
+  , (">"    , "gt_")
+  , (">="   , "ge_")
+  , ("list" , "list_")
+  , ("list?", "listq_")
+  , ("pair?", "listq_")
+  , ("null?", "null_")
+  , ("not"  , "not_")
+  , ("and"  , "and_")
+  , ("or"   , "or_")
+  , ("map"  , "map_")
+  , ("filter", "filter_")
+  ]
 
 convertPrim :: String -> String
 convertPrim x = fromMaybe x (M.lookup x prim)
 
 gen :: LispStruct -> String
-gen (Atom    x     ) = x
-gen (Number  x     ) = show x
-gen (String  x     ) = "\"" ++ x ++ "\""
-gen (Boolean x     ) = if x then "True" else "False"
-gen (Define x y    ) = define (gen x) (gen y)
-gen (IfExpr p r a  ) = "(" ++ gen r ++ " if " ++ gen p ++ " else " ++ gen a ++ ")"
+gen (Atom    x ) = x
+gen (Number  x ) = show x
+gen (String  x ) = "\"" ++ x ++ "\""
+gen (Boolean x ) = if x then "True" else "False"
+gen (Define x y) = define (gen x) (gen y)
+gen (IfExpr p r a) =
+  "(" ++ gen r ++ " if " ++ gen p ++ " else " ++ gen a ++ ")"
 gen (Quote q       ) = genQuote q
 gen (Lambda a b    ) = lambda (map gen a) (gen b)
 gen (List l        ) = genList l
@@ -51,9 +54,9 @@ gen (DottedList l x) = genDList l x
 
 genQuote :: LispStruct -> String
 genQuote (List l) = list $ map (\x -> if isList x then genQuote x else gen x) l
-  where
-    isList (List _) = True
-    isList _        = False
+ where
+  isList (List _) = True
+  isList _        = False
 genQuote x = gen x
 
 genList :: [LispStruct] -> String

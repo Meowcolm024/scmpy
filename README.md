@@ -1,6 +1,6 @@
 # scmpy
 
-A naive transpiler for *Scheme* to *Python*!
+A naive *Scheme* to *Python* transpiler!
 
 ## Clone & Build
 
@@ -37,4 +37,8 @@ Available options:
   -h,--help                Show this help text
 ```
 
-* Notice `-llist` is not available yet.
+- Notice `-llist` is not available yet.
+
+## Not supported
+
+- muatble ops like `set!`

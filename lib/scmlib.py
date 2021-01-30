@@ -34,4 +34,6 @@ lt_ = lambda *kwargs: chained(operator.lt, list(kwargs))
 le_ = lambda *kwargs: chained(operator.le, list(kwargs))
 gt_ = lambda *kwargs: chained(operator.gt, list(kwargs))
 ge_ = lambda *kwargs: chained(operator.ge, list(kwargs))
+map_ = lambda func, *iterable: list(map(func, *iterable))
+filter_ = lambda func, *iterable: list(filter(func, *iterable))
 #### --  scmpy lib end  -- ####
