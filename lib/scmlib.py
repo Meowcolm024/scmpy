@@ -2,59 +2,26 @@
 import operator
 import functools
 
-def _list(*kwargs):
-    return list(kwargs)
-
 def display(*kwargs):
     for i in kwargs:
         print(i, end=' ')
 
+_list = lambda *kwargs: list(kwargs)
 displayln = print
-
-def cons(x, xs):
-    if type(xs) == list:
-        return [x] + xs
-    if type(xs) == tuple:
-        return (x, xs)
-
-def car(xs):
-    return xs[0]
-
-def cdr(xs):
-    if type(xs) == list:
-        return xs[1:]
-    if type(xs) == tuple:
-        return xs[2]
-
-def _null(x):
-    return len(x) == 0
-
+cons = lambda x, xs:[x] + xs if type(xs) == list else (x, xs) if type(xs) == tuple else None
+car = lambda xs: xs[0]
+cdr = lambda xs: xs[1:] if type(xs) == list else xs[1] if type(xs) == tuple else None
+_null = lambda x: len(x) == 0
 null = ()
+_if = lambda pred, result, alt: result if pred else alt
+_add = lambda *kwargs: functools.reduce(operator.add, list(kwargs))
+_sub = lambda *kwargs: functools.reduce(operator.sub, list(kwargs))
+_mul = lambda *kwargs: functools.reduce(operator.mul, list(kwargs))
+_div = lambda *kwargs: functools.reduce(operator.truediv, list(kwargs))
+_eq = lambda *kwargs: functools.reduce(operator.eq, list(kwargs))
+_and = lambda *kwargs: functools.reduce(operator.and_, list(kwargs))
+_or = lambda *kwargs: functools.reduce(operator.or_, list(kwargs))
+_not = lambda x: not x
+_listq = lambda x: type(x) == list or type(x) == tuple
 
-def _if(pred, result, alt):
-    return result if pred else alt
-
-def _add(*kwargs):
-    return functools.reduce(operator.add, list(kwargs))
-
-def _sub(*kwargs):
-    return functools.reduce(operator.sub, list(kwargs))
-
-def _mul(*kwargs):
-    return functools.reduce(operator.mul, list(kwargs))
-
-def _div(*kwargs):
-    return functools.reduce(operator.truediv, list(kwargs))
-
-def _eq(*kwargs):
-    return functools.reduce(operator.eq, list(kwargs))
-
-def _and(*kwargs):
-    return functools.reduce(operator.and_, list(kwargs))
-
-def _or(*kwargs):
-    return functools.reduce(operator.or_, list(kwargs))
-
-def _not(x):
-    return not x
 #### --  scmpy lib end  -- ####
